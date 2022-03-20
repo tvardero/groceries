@@ -1,19 +1,37 @@
-var builder = WebApplication.CreateBuilder(args);
+global using Groceries.Models;
+global using Groceries.Repositories;
 
-// Add services to the container.
+using Microsoft.EntityFrameworkCore;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+builder.Services.AddDbContext<ApplicationDbContext>(
+    o => o.UseSqlite("Data Source=./data/datadb.sqlite")
+);
+
+builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
+builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
+
+WebApplication app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseStatusCodePages();
+    app.UseDeveloperExceptionPage();
+}
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}");
+    pattern: "{controller=Home}/{action=Index}"
+);
 
 app.Run();
