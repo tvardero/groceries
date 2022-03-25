@@ -1,6 +1,7 @@
 global using Groceries.Models;
 global using Groceries.Repositories;
 
+using Groceries.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -33,5 +34,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Products}/{action=Index}"
 );
+
+app.SeedDatabase();
 
 app.Run();
