@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Groceries.Models;
 
 public class Category
 {
+    [HiddenInput]
     public uint Id { get; set; }
 
     [Required]
