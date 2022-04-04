@@ -2,8 +2,9 @@
 
 <div class="d-flex gap-3 flex-wrap justify-content-center">
     @foreach (Product product in Model)
+
     {
-            <div class="card" style="width: 350px">
+        <div class="card" style="width: 350px">
             @* <img /> *@
             <div class="card-body">
                 <h5 class="card-title">
@@ -18,5 +19,10 @@
                 </h5>
                 <p>@product.Description</p>
             </div>
+            <div class="card-footer">
+                <partial name="_AddToCartForm" model="new AddToCartViewModel() { ProductId = product.Id }" />
+            </div>
+        </div>
+
     }
 </div>

@@ -1,0 +1,12 @@
+@model AddToCartViewModel
+
+<form method="post" class="container">
+    <div class="row">
+        <div class="col-9 ps-0">
+            <input asp-for="Quantity" class="form-control" />
+            <input asp-for="ProductId" />
+        </div>
+        <button type="submit" asp-controller="Cart" asp-action="Add"
+            asp-route-returnUrl="@Url.RouteUrl(ViewContext.RouteData.Values)" class="btn btn-success col-3">Add</button>
+    </div>
+</form>

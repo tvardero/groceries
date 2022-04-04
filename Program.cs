@@ -1,4 +1,5 @@
 global using Groceries.Models;
+global using Groceries.Models.ViewModels;
 global using Groceries.Repositories;
 
 using Groceries.Infrastructure;
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
 builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
+if (builder.Environment.IsDevelopment()) builder.Services.AddSingleton<Cart>(); // Testing purposes only
 
 WebApplication app = builder.Build();
 
