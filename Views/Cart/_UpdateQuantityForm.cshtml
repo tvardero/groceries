@@ -1,0 +1,17 @@
+@model AddToCartViewModel
+
+<form method="post" class="w-100">
+    <div class="d-sm-flex gap-1">
+        <div>
+            <input asp-for="Quantity" class="form-control" />
+            <input asp-for="ProductId" />
+        </div>
+        <div style="width:40px">
+            <button type="submit" asp-controller="Cart" asp-action="Update"
+                asp-route-returnUrl="@Context.Request.Query["returnUrl"]" class="btn btn-outline-primary w-100"
+                title="Зберегти">
+                <i class="fa fa-save"></i>
+            </button>
+        </div>
+    </div>
+</form>

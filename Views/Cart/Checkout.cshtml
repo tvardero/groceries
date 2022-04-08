@@ -1,0 +1,130 @@
+@model CheckoutViewModel
+
+<div class="container-xl">
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="FirstName" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="LastName" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="Phone" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <div class="input-group-text">+380</div>
+                                <input asp-for="Phone" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="Email" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressRegion" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressRegion" class="form-control" />
+                            <span asp-validation-for="AddressRegion" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressCity" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressCity" class="form-control" />
+                            <span asp-validation-for="AddressCity" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressStreet" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressStreet" class="form-control" />
+                            <span asp-validation-for="AddressStreet" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressHouse" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressHouse" class="form-control" />
+                            <span asp-validation-for="AddressHouse" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressFlat" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressFlat" class="form-control" />
+                            <span asp-validation-for="AddressFlat" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row align-items-baseline">
+                        <label asp-for="AddressPostalCode" class="form-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="AddressPostalCode" class="form-control" />
+                            <span asp-validation-for="AddressPostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-grid d-sm-block gap-1">
+
+            @if (Model.ReturnUrl != null)
+            {
+                <a href="@Model.ReturnUrl" class="btn btn-outline-primary">Продовжити купувати</a>
+            }
+            <button type="submit" class="btn btn-warning">Обрати спосіб сплати</button>
+        </div>
+    </form>
+
+</div>

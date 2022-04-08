@@ -1,40 +1,52 @@
 @model CartViewModel
 
-<table class="table table-stripped table-bordered">
-    <thead>
-        <tr>
+    <table class="table table-stripped table-bordered">
+        <thead>
+            <tr>
             <th style="max-width: 120px"></th>
-            <th>Назва продукту</th>
+                <th>Назва продукту</th>
             <th style="width: 120px">Ціна</th>
             <th style="width: 100px">Кількість</th>
-            <th style="width: 120px">Сума</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (CartItem item in Model.Cart.Items)
-        {
-            <tr>
-                <td>@* Actions *@</td>
-                <td>@item.Product.Name</td>
-                <td class="text-end">@item.Product.Price.ToString("c")</td>
-                <td>@item.Quantity</td>
-                <td class="text-end">@((item.Quantity * item.Product.Price).ToString("c"))</td>
+                <th style="width: 120px">Сума</th>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td></td>
-            <th colspan="3">Загальна сума: </th>
-            <td class="text-end">@Model.Cart.TotalPrice.ToString("c")</td>
-        </tr>
-    </tfoot>
-</table>
+        </thead>
+        <tbody>
+            @foreach (CartItem item in Model.Cart.Items)
+            {
+                <tr class="align-middle">
+                    <td>
+                        @await Html.PartialAsync("_DeleteFromCartForm", new AddToCartViewModel() { ProductId =
+                    @item.Product.Id })
+                    </td>
+                    <td>@item.Product.Name</td>
+                    <td class="text-end">@item.Product.Price.ToString("c")</td>
+                    <td>
+                        @await Html.PartialAsync("_UpdateQuantityForm", new AddToCartViewModel() {ProductId =
+                    item.Product.Id, Quantity = item.Quantity})
+                    </td>
+                    <td class="text-end">@((item.Quantity * item.Product.Price).ToString("c"))</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <th colspan="3" class="text-end">Загальна сума:</th>
+                <td class="text-end">@Model.Cart.TotalPrice.ToString("c")</td>
+            </tr>
+        </tfoot>
+    </table>
 
-<div class="d-sm-inline d-block">
-    @if (Model.ReturnUrl != null)
-    {
-        <a href="@Model.ReturnUrl" class="btn btn-outline-dark">Continue shopping</a>
-    }
-    @* Check out *@
+    <div class="d-sm-inline d-block">
+        @if (Model.ReturnUrl != null)
+        {
+            <a href="@Model.ReturnUrl" class="btn btn-outline-primary">Продовжити купувати</a>
+        }
+        @if (Model.Cart.TotalPrice > 0)
+        {
+            <a asp-action="Checkout" asp-route-returnUrl="@Context.Request.Query["returnUrl"]"
+            class="btn btn-outline-primary">До сплати</a>
+        }
+    </div>
+
 </div>

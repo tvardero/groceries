@@ -1,0 +1,10 @@
+@model AddToCartViewModel
+
+<form method="post" class="w-100">
+    <input asp-for="Quantity" hidden />
+    <input asp-for="ProductId" />
+    <button type="submit" asp-controller="Cart" asp-action="Delete"
+        asp-route-returnUrl="@Context.Request.Query["returnUrl"]" class="btn btn-outline-danger w-100" title="Видалити">
+        <i class="fa fa-trash-can"></i>
+    </button>
+</form>
