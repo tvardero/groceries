@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="@(ViewData["Language"] ?? "en")">
 
 <head>
@@ -7,8 +7,6 @@
     <title>@(ViewData["Title"] ?? "Groceries")</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" asp-href-include="~/lib/@@fortawesome/fontawesome-free/css/*.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Groceries.styles.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -36,11 +34,16 @@
     </header>
 
     <div class="container-fluid">
+
+        <main role="main" class="pb-3">
+
+            @if (!string.IsNullOrEmpty((string?)TempData["Message"]))
+            {
                 <div class="alert alert-@TempData["MessageColor"]">
                     @TempData["Message"]
                 </div>
+            }
 
-        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
@@ -53,7 +56,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
+    @* <script src="~/js/site.js" asp-append- version="true"></script> *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
