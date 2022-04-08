@@ -28,9 +28,9 @@ public static class SeedDatabaseWebApplicationExtension
 
     private static readonly Category[] _categorySeeds = new Category[]
     {
-        new() { Name = "Фрукты и овощи" },
-        new() { Name = "Напитки" },
-        new() { Name = "Сухофрукты и орехи" }
+        new() { Name = "Фрукти та овочі" },
+        new() { Name = "Напої" },
+        new() { Name = "Горіхи та сухофрукти" }
     };
 
     private static readonly Product[] _productSeeds = new Product[]
@@ -60,7 +60,7 @@ public static class SeedDatabaseWebApplicationExtension
         {
             Name = "Пекінская капуста",
             Category = _categorySeeds[0],
-            Description = "Приїхала до нас з Пекину!",
+            Description = "Приїхала до нас з Пекіну!",
             Price = 43.23m
         },
         new()
