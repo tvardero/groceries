@@ -39,6 +39,7 @@ public class CartController : Controller
         return Redirect(returnUrl ?? "/");
     }
 
+    [HttpPost]
     public IActionResult Update(AddToCartViewModel model, string? returnUrl)
     {
         if (ModelState.IsValid)
@@ -53,6 +54,7 @@ public class CartController : Controller
         return RedirectToAction(nameof(Index), new { returnUrl });
     }
 
+    [HttpPost]
     public IActionResult Delete(AddToCartViewModel model, string? returnUrl)
     {
         if (ModelState.IsValid)
