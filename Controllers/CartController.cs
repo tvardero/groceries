@@ -4,10 +4,11 @@ namespace Groceries.Controllers;
 
 public class CartController : Controller
 {
-    public CartController(Cart cart, IRepository<Product> productRepository)
+    public CartController(Cart cart, IRepository<Product> productRepository, IRepository<Order> orderRepository)
     {
         _cart = cart;
         _productRepository = productRepository;
+        _orderRepository = orderRepository;
     }
 
     public IActionResult Index(string? returnUrl) => View(new CartViewModel() { Cart = _cart, ReturnUrl = returnUrl });
@@ -96,4 +97,5 @@ public class CartController : Controller
 
     private readonly Cart _cart;
     private readonly IRepository<Product> _productRepository;
+    private readonly IRepository<Order> _orderRepository;
 }
