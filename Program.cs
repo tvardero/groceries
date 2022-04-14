@@ -15,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
 builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
+builder.Services.AddTransient<IRepository<Order>, EFOrderRepository>();
+
 if (builder.Environment.IsDevelopment()) builder.Services.AddSingleton<Cart>(); // Testing purposes only
 
 WebApplication app = builder.Build();
