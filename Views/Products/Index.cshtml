@@ -1,27 +1,35 @@
 @model IEnumerable<Product>
 
-<div class="d-flex gap-3 flex-wrap">
-    @foreach (Product product in Model)
-    {
-        <div class="card" style="width: 350px">
-            @* <img /> *@
-            <div class="card-body">
-                <h5 class="card-title">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-9 p-0">@product.Name</div>
-                            <div class="col-3 p-0">
-                                <span class="badge rounded-pill bg-success">@product.Price.ToString("c")</span>
+<div class="row">
+    <div class="col-lg-3 col-xl-2">
+        @(await Component.InvokeAsync<CategoriesSideMenuViewComponent>())
+    </div>
+
+    <div class="col-lg-9 col-xl-10">
+        <div class="d-flex gap-3 flex-wrap">
+            @foreach (Product product in Model)
+            {
+                <div class="card" style="width: 350px">
+                    @* <img /> *@
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-9 p-0">@product.Name</div>
+                                    <div class="col-3 p-0">
+                                        <span class="badge rounded-pill bg-success">@product.Price.ToString("c")</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </h5>
+                        <p>@product.Description</p>
                     </div>
-                </h5>
-                <p>@product.Description</p>
-            </div>
-            <div class="card-footer">
-                @await Html.PartialAsync("_AddToCartForm", new AddToCartViewModel() {ProductId = product.Id,
-            Quantity = 1})
-            </div>
+                    <div class="card-footer">
+                        @await Html.PartialAsync("_AddToCartForm", new AddToCartViewModel() {ProductId = product.Id,
+                    Quantity = 1})
+                    </div>
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>
