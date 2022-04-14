@@ -1,0 +1,19 @@
+@model IEnumerable<Category>
+
+@{
+    uint currentCategory;
+    if (!uint.TryParse(Context.Request.Query["categoryId"].FirstOrDefault(), out currentCategory))
+        currentCategory = 0;
+}
+
+<div class="card bg-light h-100">
+    <div class="d-grid gap-3 m-3">
+        <a href="/" class="btn btn-@(currentCategory == 0? "dark" : "outline-dark")">Всі категорії</a>
+
+        @foreach (Category category in Model)
+        {
+            <a asp-route-categoryId="@category.Id"
+            class="btn btn-@(currentCategory == category.Id? "dark" : "outline-dark")">@category.Name</a>
+        }
+    </div>
+</div>
