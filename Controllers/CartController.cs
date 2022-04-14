@@ -87,9 +87,78 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
+            Order order = new()
+            {
+                Items = _cart.Items,
+                CustomerInfo = model.CustomerInfo,
+                FixedSum = _cart.TotalSum
+            };
+
+            // Resolve tracking of CartItem.Product entities
+            foreach (CartItem item in order.Items)
+            {
+                item.Product = _productRepository.Entities.Single(p => p.Id == item.Product.Id);
+            }
+
+            _orderRepository.Add(order);
+
             _cart.Items.Clear();
+
+            return RedirectToAction(nameof(Payment), new { orderId = order.Id });
+        }
+
+        return View(model);
+    }
+
+    public IActionResult Payment(uint orderId = 0)
+    {
+        Order? order;
+
+        if (orderId != 0)
+        {
+            order = _orderRepository.Entities.SingleOrDefault(o => o.Id == orderId);
+
+            if (order == null)
+            {
+                TempData["Message"] = "Не знайдено замовлення з id " + orderId;
+                TempData["MessageColor"] = "danger";
+                return Redirect("/");
+            }
+        }
+        else
+        {
+            TempData["Message"] = "Не знайдено замовлення з id " + orderId;
+            TempData["MessageColor"] = "danger";
+            return Redirect("/");
+        }
+
+        if (order.IsPaid)
+        {
             return RedirectToAction(nameof(Success));
         }
+
+        PaymentViewModel model = new() { OrderId = order.Id };
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult Payment(PaymentViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            Order? order = _orderRepository.Entities.SingleOrDefault(o => o.Id == model.OrderId);
+            if (order == null)
+            {
+                ModelState.AddModelError("", "Не знайдено замовлення, спробуйте ще раз.");
+                return View(model);
+            }
+
+            order.IsPaid = true;
+            _orderRepository.Update(order);
+
+            return RedirectToAction(nameof(Success));
+        }
+
         return View(model);
     }
 
