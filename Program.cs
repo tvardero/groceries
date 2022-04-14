@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+    name: null!,
     pattern: "{controller=Products}/{action=Index}"
 );
 
