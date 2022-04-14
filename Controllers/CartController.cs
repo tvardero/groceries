@@ -71,7 +71,7 @@ public class CartController : Controller
 
     public IActionResult Checkout(string? returnUrl = null)
     {
-        if (_cart.TotalPrice > 0)
+        if (_cart.TotalSum > 0)
         {
             return View(new CheckoutViewModel() { ReturnUrl = returnUrl });
         }
