@@ -4,9 +4,9 @@ public interface IRepository<T>
 {
     public IQueryable<T> Entities { get; }
 
-    public void Add(T product);
+    public void Add(T entity);
 
-    public void Update(T product);
+    public void Update(T entity);
 
-    public void Remove(T product);
+    public void Remove(T entity);
 }
