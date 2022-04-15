@@ -1,4 +1,4 @@
-@model IEnumerable<Product>
+@model PaginatedEnumerableViewModel<Product>
 
 <div class="row">
     <div class="col-lg-3 col-xl-2">
@@ -7,7 +7,7 @@
 
     <div class="col-lg-9 col-xl-10">
         <div class="d-flex gap-3 flex-wrap">
-            @foreach (Product product in Model)
+            @foreach (Product product in Model.Entities)
             {
                 <div class="card" style="width: 350px">
                     @* <img /> *@
@@ -30,6 +30,12 @@
                     </div>
                 </div>
             }
+        </div>
+
+        <div class="mt-3">
+            <pagination model="@Model.PaginationModel"
+                href="@Url.RouteUrl(new {categoryId = Context.Request.Query["categoryId"]})">
+            </pagination>
         </div>
     </div>
 </div>
