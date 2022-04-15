@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     o => o.UseSqlite("Data Source=./data/datadb.sqlite")
 );
 
+builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
 builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
 if (builder.Environment.IsDevelopment()) builder.Services.AddSingleton<Cart>(); // Testing purposes only
