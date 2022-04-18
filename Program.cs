@@ -19,6 +19,7 @@ builder.Services.AddSession();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
 builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
+builder.Services.AddTransient<IRepository<Order>, EFOrderRepository>();
 builder.Services.AddScoped<Cart, SessionedCart>();
 
 WebApplication app = builder.Build();

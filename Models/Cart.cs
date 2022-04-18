@@ -4,7 +4,7 @@ public class Cart
 {
     public IEnumerable<CartItem> Entities => items;
 
-    public decimal TotalPrice => items.Sum(ci => ci.Product.Price * ci.Quantity);
+    public decimal TotalSum => items.Sum(ci => ci.Product.Price * ci.Quantity);
 
     public virtual void Add(CartItem item) => items.Add(item);
 

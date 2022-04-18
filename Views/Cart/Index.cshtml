@@ -34,7 +34,7 @@
             <tr>
                 <td></td>
                 <th colspan="3" class="text-end">Загальна сума:</th>
-                <td class="text-end">@Model.Cart.TotalPrice.ToString("c")</td>
+                <td class="text-end">@Model.Cart.TotalSum.ToString("c")</td>
             </tr>
         </tfoot>
     </table>
@@ -44,7 +44,7 @@
         {
             <a href="@Model.ReturnUrl" class="btn btn-outline-primary">Продовжити купувати</a>
         }
-        @if (Model.Cart.TotalPrice > 0)
+        @if (Model.Cart.TotalSum > 0)
         {
             <a asp-action="Checkout" asp-route-returnUrl="@Context.Request.Query["returnUrl"]"
             class="btn btn-outline-primary">До сплати</a>
