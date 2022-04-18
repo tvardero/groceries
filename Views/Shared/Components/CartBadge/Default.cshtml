@@ -1,0 +1,13 @@
+@model decimal
+
+<a asp-controller="Cart" asp-action="Index" asp-route-returnUrl="@Url.RouteUrl(ViewContext.RouteData.Values)">
+    @if (Model != 0)
+    {
+        <h5>
+            <span class="badge rounded-pill bg-success ">
+                @Model.ToString("c")
+                <i class="fa fa-cart-shopping"></i>
+            </span>
+        </h5>
+    }
+</a>
