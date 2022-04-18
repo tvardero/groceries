@@ -17,10 +17,10 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
-            CartItem? existingItem = _cart.Items.SingleOrDefault(ci => ci.Product.Id == model.ProductId);
+            CartItem? existingItem = _cart.Entities.SingleOrDefault(ci => ci.Product.Id == model.ProductId);
             if (existingItem == null)
             {
-                _cart.Items.Add(new()
+                _cart.Add(new()
                 {
                     Product = _productRepository.Entities.Single(p => p.Id == model.ProductId),
                     Quantity = model.Quantity
@@ -44,7 +44,7 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
-            CartItem item = _cart.Items.Single(ci => ci.Product.Id == model.ProductId);
+            CartItem item = _cart.Entities.Single(ci => ci.Product.Id == model.ProductId);
             item.Quantity = model.Quantity;
             return RedirectToAction(nameof(Index), new { returnUrl });
         }
@@ -59,8 +59,8 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
-            CartItem item = _cart.Items.Single(ci => ci.Product.Id == model.ProductId);
-            _cart.Items.Remove(item);
+            CartItem item = _cart.Entities.Single(ci => ci.Product.Id == model.ProductId);
+            _cart.Remove(item);
             return RedirectToAction(nameof(Index), new { returnUrl });
         }
 
@@ -86,7 +86,7 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
-            _cart.Items.Clear();
+            _cart.Clear();
             return RedirectToAction(nameof(Success));
         }
         return View(model);
