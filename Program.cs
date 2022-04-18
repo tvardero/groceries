@@ -13,14 +13,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     o => o.UseSqlite("Data Source=./data/datadb.sqlite")
 );
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IRepository<Product>, EFProductRepository>();
 builder.Services.AddTransient<IRepository<Category>, EFCategoryRepository>();
-if (builder.Environment.IsDevelopment()) builder.Services.AddSingleton<Cart>(); // Testing purposes only
+builder.Services.AddScoped<Cart, SessionedCart>();
 
 WebApplication app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

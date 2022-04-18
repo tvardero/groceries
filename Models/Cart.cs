@@ -1,10 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Groceries.Models;
 
 public class Cart
 {
-    public List<CartItem> Items { get; } = new();
+    public IEnumerable<CartItem> Entities => items;
 
-    public decimal TotalPrice => Items.Sum(ci => ci.Product.Price * ci.Quantity);
+    public decimal TotalPrice => items.Sum(ci => ci.Product.Price * ci.Quantity);
+
+    public virtual void Add(CartItem item) => items.Add(item);
+
+    public virtual void Remove(CartItem item) => items.Remove(item);
+
+    public virtual void Clear() => items.Clear();
+
+    protected List<CartItem> items = new();
 }
